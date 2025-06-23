@@ -10,7 +10,7 @@ on:
         default: success
     outputs:
       status:
-        value: ${{ jobs.build.outpus.build-status }}
+        value: ${{ jobs.build.outputs.build-status }}
 
 jobs:
   build:
