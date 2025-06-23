@@ -1,0 +1,26 @@
+name: Working with Outputs
+
+on:
+  workflow_call:
+    inputs:
+      build-status:
+        description: "Choose the build status for the demo"
+        required: true
+        type: string
+        default: success
+    outputs:
+      status:
+        value: ${{ jobs.build.outpus.build-status }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      build-status: ${{ steps.build.outputs.status }}
+    steps:
+      - name: Print GITHUB_OUTPUT path
+        run: echo $GITHUB_OUTPUT 
+
+      - name: Build
+        id: build
+        run: echo "status=${{ inputs.build-status }}" >> "$GITHUB_OUTPUT"  
